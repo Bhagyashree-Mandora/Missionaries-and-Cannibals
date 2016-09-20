@@ -25,12 +25,15 @@ public class Game {
 
         System.out.println("Game has begun-");
 
-        move(initialState);
+        boolean solved = move(initialState);
 
-        printSteps(nMissionaries, nCannibals);
+        if (solved) {
+            printSteps(nMissionaries, nCannibals);
+            System.out.println("Solved!");
+        }
     }
 
-    private void move(State currentState) {
+    private boolean move(State currentState) {
 
         List<State> nextStates = new LinkedList<>();
 
@@ -39,17 +42,19 @@ public class Game {
 
         while (!nextStates.isEmpty()) {
             System.out.println("here..");
-            if (nextStates.get(0).equals(FINAL_STATE)) {
+            currentState = nextStates.get(0);
+
+            if (currentState.equals(FINAL_STATE)) {
                 break;
             }
             for (MCTuple action : ACTIONS) {
-                System.out.println("State is: " + nextStates.get(0).toString());
+                System.out.println("State is: " + currentState.toString());
                 System.out.println("Action is: " + action.toString());
-                State newState = nextStates.get(0).changeBy(action);
+                State newState = currentState.changeBy(action);
                 System.out.println("State after action is: " + newState.toString());
                 if (visitedStates.contains(newState)) {
                     System.out.println("visited state contains present state..");
-                    continue;
+//                    continue;
                 } else if (isStateValid(newState)) {
                     System.out.println("State is valid!");
                     nextStates.add(newState);
@@ -58,6 +63,11 @@ public class Game {
             }
             nextStates.remove(0);
         }
+
+        if (!currentState.equals(FINAL_STATE) && nextStates.isEmpty()) {
+            System.out.println("Problem cannot be solved in this case!");
+            return false;
+        } else return true;
     }
 
     private boolean isStateValid(State newState) {
@@ -75,7 +85,6 @@ public class Game {
     }
 
     private void printSteps(int nMissionaries, int nCannibals) {
-        System.out.println("Game has ended!");
         int i = 0;
         for (State state : visitedStates) {
             System.out.println("\nPosition : " + ++i);

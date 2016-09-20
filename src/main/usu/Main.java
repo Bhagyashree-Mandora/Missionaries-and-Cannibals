@@ -14,6 +14,6 @@ public class Main {
         Game game = new Game();
         game.play(Integer.valueOf(nMissionaries), Integer.valueOf(nCannibals));
 
-        System.out.println("Solved!");
+        System.out.println("Game has ended!");
     }
 }
