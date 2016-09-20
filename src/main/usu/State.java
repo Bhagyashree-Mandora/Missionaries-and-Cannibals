@@ -14,18 +14,12 @@ public class State {
 
     public State changeBy(MCTuple action) {
         int missionariesRemaining, cannibalsRemaining;
-        if(boatOnLeft == true) {
+        if(boatOnLeft) {
             missionariesRemaining = missionariesOnLeft - action.getnMissionary();
             cannibalsRemaining = cannibalsOnLeft - action.getnCannibal();
-            System.out.println("m = " + missionariesRemaining);
-            System.out.println("c = " + cannibalsRemaining);
-            System.out.println("boat is on left- so true == " + boatOnLeft);
         } else {
             missionariesRemaining = missionariesOnLeft + action.getnMissionary();
             cannibalsRemaining = cannibalsOnLeft + action.getnCannibal();
-            System.out.println("m = " + missionariesRemaining);
-            System.out.println("c = " + cannibalsRemaining);
-            System.out.println("boat is on right- so false == " + boatOnLeft);
         }
         return new State(missionariesRemaining,cannibalsRemaining,!boatOnLeft);
     }

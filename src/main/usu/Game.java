@@ -43,7 +43,7 @@ public class Game {
         visitedStates.add(currentState);
 
         while (!nextStates.isEmpty()) {
-            System.out.println("here..");
+
             currentState = nextStates.get(0);
 
             if (currentState.equals(FINAL_STATE)) {
@@ -51,16 +51,11 @@ public class Game {
             }
             deadEnd = true;
             for (MCTuple action : ACTIONS) {
-                System.out.println("State is: " + currentState.toString());
-                System.out.println("Action is: " + action.toString());
                 State newState = currentState.changeBy(action);
-                System.out.println("State after action is: " + newState.toString());
                 if (visitedStates.contains(newState)) {
-                    System.out.println("visited state contains present state..");
-//                    continue;
+                    continue;
                 } else if (isStateValid(newState)) {
                     deadEnd = false;
-                    System.out.println("State is valid!");
                     nextStates.add(newState);
                     visitedStates.add(newState);
                 }
@@ -83,7 +78,8 @@ public class Game {
     private boolean isStateValid(State newState) {
         if (newState.cannibalsOnLeft > newState.missionariesOnLeft && (newState.missionariesOnLeft != 0)) {
             return false;
-        } else if ((totalCannibals - newState.cannibalsOnLeft) > (totalMissionaries - newState.missionariesOnLeft) && ((totalMissionaries - newState.missionariesOnLeft) != 0)) {
+        } else if ((totalCannibals - newState.cannibalsOnLeft) > (totalMissionaries - newState.missionariesOnLeft) &&
+                ((totalMissionaries - newState.missionariesOnLeft) != 0)) {
             return false;
         }
         if (newState.missionariesOnLeft > totalMissionaries || newState.cannibalsOnLeft > totalCannibals) {
@@ -96,7 +92,6 @@ public class Game {
 
     private void printSteps(int nMissionaries, int nCannibals) {
         int i = 0;
-//        for (State state : visitedStates) {
         for (State state : positionsToGoal) {
             System.out.println("\nPosition : " + i++);
             System.out.println("Left: m = " + state.missionariesOnLeft + " c = " + state.cannibalsOnLeft);

@@ -16,12 +16,4 @@ public class MCTuple {
     public int getnCannibal() {
         return nCannibal;
     }
-
-    @Override
-    public String toString() {
-        return "MCTuple{" +
-                "nMissionary=" + nMissionary +
-                ", nCannibal=" + nCannibal +
-                '}';
-    }
 }
