@@ -2,9 +2,9 @@ package main.usu;
 
 
 public class State {
-    int missionariesOnLeft;
-    int cannibalsOnLeft;
-    boolean boatOnLeft;
+    private int missionariesOnLeft;
+    private int cannibalsOnLeft;
+    private boolean boatOnLeft;
 
     public State(int nMissionaries, int nCannibals, boolean boat) {
         missionariesOnLeft = nMissionaries;
@@ -22,6 +22,18 @@ public class State {
             cannibalsRemaining = cannibalsOnLeft + action.getnCannibal();
         }
         return new State(missionariesRemaining,cannibalsRemaining,!boatOnLeft);
+    }
+
+    public int getMissionariesOnLeft() {
+        return missionariesOnLeft;
+    }
+
+    public int getCannibalsOnLeft() {
+        return cannibalsOnLeft;
+    }
+
+    public boolean isBoatOnLeft() {
+        return boatOnLeft;
     }
 
     @Override

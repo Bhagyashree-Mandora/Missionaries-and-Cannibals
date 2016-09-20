@@ -76,16 +76,16 @@ public class Game {
     }
 
     private boolean isStateValid(State newState) {
-        if (newState.cannibalsOnLeft > newState.missionariesOnLeft && (newState.missionariesOnLeft != 0)) {
+        if (newState.getCannibalsOnLeft() > newState.getMissionariesOnLeft() && (newState.getMissionariesOnLeft() != 0)) {
             return false;
-        } else if ((totalCannibals - newState.cannibalsOnLeft) > (totalMissionaries - newState.missionariesOnLeft) &&
-                ((totalMissionaries - newState.missionariesOnLeft) != 0)) {
-            return false;
-        }
-        if (newState.missionariesOnLeft > totalMissionaries || newState.cannibalsOnLeft > totalCannibals) {
+        } else if ((totalCannibals - newState.getCannibalsOnLeft()) > (totalMissionaries - newState.getMissionariesOnLeft()) &&
+                ((totalMissionaries - newState.getMissionariesOnLeft()) != 0)) {
             return false;
         }
-        if (newState.missionariesOnLeft < 0 || newState.cannibalsOnLeft < 0) {
+        if (newState.getMissionariesOnLeft() > totalMissionaries || newState.getCannibalsOnLeft() > totalCannibals) {
+            return false;
+        }
+        if (newState.getMissionariesOnLeft() < 0 || newState.getCannibalsOnLeft() < 0) {
             return false;
         } else return true;
     }
@@ -94,8 +94,8 @@ public class Game {
         int i = 0;
         for (State state : positionsToGoal) {
             System.out.println("\nPosition : " + i++);
-            System.out.println("Left: m = " + state.missionariesOnLeft + " c = " + state.cannibalsOnLeft);
-            System.out.println("Right: m = " + (nMissionaries - state.missionariesOnLeft) + " c = " + (nCannibals - state.cannibalsOnLeft));
+            System.out.println("Left: m = " + state.getMissionariesOnLeft() + " c = " + state.getCannibalsOnLeft());
+            System.out.println("Right: m = " + (nMissionaries - state.getMissionariesOnLeft()) + " c = " + (nCannibals - state.getCannibalsOnLeft()));
         }
     }
 }

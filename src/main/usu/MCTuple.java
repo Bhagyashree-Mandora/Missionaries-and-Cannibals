@@ -1,8 +1,8 @@
 package main.usu;
 
 public class MCTuple {
-    int nMissionary;
-    int nCannibal;
+    private int nMissionary;
+    private int nCannibal;
 
     public MCTuple(int nMissionary, int nCannibal) {
         this.nMissionary = nMissionary;
